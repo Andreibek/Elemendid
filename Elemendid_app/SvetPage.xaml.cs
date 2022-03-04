@@ -21,27 +21,27 @@ namespace Elemendid_app
             rb = new BoxView
             {
                 Color = Color.Gray,
-                CornerRadius = 80,
+                CornerRadius = 90,
                 WidthRequest = 150,
-                HeightRequest = 300,
+                HeightRequest = 150,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 VerticalOptions = LayoutOptions.CenterAndExpand
             };
             yb = new BoxView
             {
                 Color = Color.Gray,
-                CornerRadius = 80,
+                CornerRadius = 90,
                 WidthRequest = 150,
-                HeightRequest = 300,
+                HeightRequest = 150,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 VerticalOptions = LayoutOptions.CenterAndExpand
             };
             gb = new BoxView
             {
                 Color = Color.Gray,
-                CornerRadius = 80,
+                CornerRadius = 90,
                 WidthRequest = 150,
-                HeightRequest = 300,
+                HeightRequest = 150,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 VerticalOptions = LayoutOptions.CenterAndExpand
             };
@@ -49,7 +49,7 @@ namespace Elemendid_app
             {
                 Text = "Sisse",
                 TextColor = Color.Brown,
-                BackgroundColor = Color.Beige
+                BackgroundColor = Color.Beige,
             };
             btn.Clicked += Btn_Clicked;
             grid = new Grid
@@ -86,6 +86,7 @@ namespace Elemendid_app
             }
             else
             {
+                btn.Text = ("Valja");
                 on_off = true;
                 Show();
             }
@@ -94,13 +95,12 @@ namespace Elemendid_app
         {
             while (on_off)
             {
-                btn.Text = ("Valja");
-                for (int i = 0; i < 3; i++) 
+                for (int i = 0; i < 5; i++) 
                 {
                     rb.Color = Color.Red;
-                    await Task.Delay(500);
+                    await Task.Delay(700);
                     rb.Color = Color.Gray;
-                    await Task.Delay(500);
+                    await Task.Delay(700);
                     
                 }
                 if (on_off == false)
@@ -108,33 +108,33 @@ namespace Elemendid_app
                     break;
                 }
                 rb.Color = Color.Red;
-                await Task.Delay(500);
+                await Task.Delay(100);
                 for (int i = 0; i < 3; i++)
                 {
                     yb.Color = Color.Yellow;
                     await Task.Delay(400);
                     yb.Color = Color.Gray;
-                    await Task.Delay(400);
+                    await Task.Delay(401);
                 }
                 if (on_off == false)
                 {
                     break;
                 }
                 yb.Color = Color.Yellow;
-                await Task.Delay(500);
-                for (int i = 0; i < 3; i++)
+                await Task.Delay(1000);
+                for (int i = 0; i < 4; i++)
                 {
                     gb.Color = Color.Green;
-                    await Task.Delay(600);
+                    await Task.Delay(550);
                     gb.Color = Color.Gray;
-                    await Task.Delay(600);
+                    await Task.Delay(550);
                 }
                 if (on_off == false)
                 {
                     break;
                 }
                 gb.Color = Color.Green;
-                await Task.Delay(500);
+                await Task.Delay(2000);
             }
         }
     }
