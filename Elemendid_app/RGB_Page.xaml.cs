@@ -99,7 +99,7 @@ namespace Elemendid_app
             blbl.Text = String.Format("Blue = {0:X2}", b);
             glbl.Text = String.Format("Green = {0:X2}", g);
             box.Color = Color.FromRgb(r, b, g);
-            rsl.Value = r;
+            rsl.Value = r;//
             gsl.Value = g;
             bsl.Value = b;
         }
