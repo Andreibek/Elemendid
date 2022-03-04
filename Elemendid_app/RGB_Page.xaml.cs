@@ -108,7 +108,7 @@ namespace Elemendid_app
         {
             if (sender == rsl)
             {
-                rlbl.Text = String.Format("Red = {0:X2}", (int)args.NewValue);
+                rlbl.Text = String.Format("Red = {0:X2}", (int)args.NewValue);//rlbl.Text = String.Format("Red = {0:X2}", (int)args.NewValue);
             }
             else if (sender == bsl)
             {
