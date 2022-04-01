@@ -79,9 +79,6 @@ namespace Elemendid_app
             {
                 on_off = false;
                 
-                rb.Color = Color.Gray;
-                yb.Color = Color.Gray;
-                gb.Color = Color.Gray;
                 btn.Text = ("Sisse");
             }
             else

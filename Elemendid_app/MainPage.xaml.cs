@@ -10,7 +10,7 @@ namespace Elemendid_app
 {
     public partial class MainPage : ContentPage
     {
-        Button editor_btn, timer_btn, box_btn, cliker_btn,datepiker_btn,ss_btn,rgb_btn, frame_btn, image_btn, svet_btn; 
+        Button editor_btn, timer_btn, box_btn, cliker_btn,datepiker_btn,ss_btn,rgb_btn, frame_btn, image_btn, svet_btn, picker_btn; 
         public MainPage()
 
         {
@@ -85,10 +85,17 @@ namespace Elemendid_app
                 BackgroundColor = Color.Beige
             };
             svet_btn.Clicked += Start_Pages;
+            picker_btn = new Button
+            {
+                Text = "Picker leht",
+                TextColor = Color.Brown,
+                BackgroundColor = Color.Beige
+            };
+            picker_btn.Clicked += Start_Pages;
 
             StackLayout st = new StackLayout
             {
-                Children = {editor_btn,timer_btn,box_btn,cliker_btn, datepiker_btn, ss_btn, rgb_btn, frame_btn, image_btn, svet_btn }
+                Children = {editor_btn,timer_btn,box_btn,cliker_btn, datepiker_btn, ss_btn, rgb_btn, frame_btn, image_btn, svet_btn, picker_btn }
             };
             st.BackgroundColor = Color.FromRgb(50, 50, 50);
             Content = st;
@@ -138,6 +145,10 @@ namespace Elemendid_app
             else if (sender == svet_btn)
             {
                 await Navigation.PushAsync(new SvetPage());
+            }
+            else if (sender == picker_btn)
+            {
+                await Navigation.PushAsync(new Picker_Page());
             }
         }
     }
