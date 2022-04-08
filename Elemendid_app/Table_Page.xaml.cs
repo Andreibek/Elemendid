@@ -17,10 +17,29 @@ namespace Elemendid_app
         ImageCell ic;
         TableSection fotosection;
         ViewCell vc;
-        Entry tel_nr_email, text;
+        EntryCell tel2,mail2,sms2;
+        Entry text;
         Button call_btn, sms_btn, mail_btn;
         public Table_Page()
         {
+            sms2 = new EntryCell
+            {
+                Label = "Nimi:",
+                Placeholder = "Sisesta oma sõbra nimi",
+                Keyboard = Keyboard.Default
+            };
+            tel2 = new EntryCell
+            {
+                Label = "Telefon",
+                Placeholder = "Sisesta tel. number",
+                Keyboard = Keyboard.Default
+            };
+            mail2 = new EntryCell
+            {
+                Label = "Email",
+                Placeholder = "Sisesta email",
+                Keyboard = Keyboard.Default
+            };
             call_btn = new Button
             {
                 Text = "Call",
@@ -54,27 +73,11 @@ namespace Elemendid_app
                 Intent = TableIntent.Form,
                 Root=new TableRoot("Andmete sisestamine") {
                     new TableSection("Põhiandmine") {
-                        new EntryCell
-                        {
-                            Label = "Nimi:",
-                            Placeholder = "Sisesta oma sõbra nimi",
-                            Keyboard = Keyboard.Default
-                        }
+                        sms2
                     },
                     new TableSection("Kontaktandme:") {
-                        new EntryCell
-                        {
-                            Label = "Telefon",
-                            Placeholder = "Sisesta tel. number",
-                            Keyboard = Keyboard.Default
-
-                        },
-                        new EntryCell
-                        {
-                            Label = "Email",
-                            Placeholder = "Sisesta email",
-                            Keyboard = Keyboard.Default
-                        },
+                        tel2,
+                        mail2,
                         sc
                     },
                     fotosection
@@ -88,7 +91,7 @@ namespace Elemendid_app
             var mail = CrossMessaging.Current.EmailMessenger;
             if (mail.CanSendEmail)
             {
-                mail.SendEmail(tel_nr_email.Text);
+                mail.SendEmail(mail2.Text);
             }
         }
 
@@ -97,7 +100,7 @@ namespace Elemendid_app
             var sms = CrossMessaging.Current.SmsMessenger;
             if (sms.CanSendSms)
             {
-                sms.SendSms(tel_nr_email.Text, text.Text);
+                sms.SendSms(sms2.Text);
             }
         }
 
@@ -106,7 +109,7 @@ namespace Elemendid_app
             var call = CrossMessaging.Current.PhoneDialer;
             if (call.CanMakePhoneCall)
             {
-                call.MakePhoneCall(tel_nr_email.Text);
+                call.MakePhoneCall(tel2.Text);
             }
         }
 
