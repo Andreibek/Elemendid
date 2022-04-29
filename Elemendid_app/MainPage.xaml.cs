@@ -10,7 +10,7 @@ namespace Elemendid_app
 {
     public partial class MainPage : ContentPage
     {
-        Button editor_btn, timer_btn, box_btn, cliker_btn,datepiker_btn,ss_btn,rgb_btn, frame_btn, image_btn, svet_btn, picker_btn, table_btn; 
+        Button editor_btn, timer_btn, box_btn, cliker_btn,datepiker_btn,ss_btn,rgb_btn, frame_btn, image_btn, svet_btn, picker_btn, table_btn, list_btn; 
         public MainPage()
 
         {
@@ -99,10 +99,17 @@ namespace Elemendid_app
                 BackgroundColor = Color.Beige
             };
             table_btn.Clicked += Start_Pages;
+            list_btn = new Button
+            {
+                Text = "List leht",
+                TextColor = Color.Brown,
+                BackgroundColor = Color.Beige
+            };
+            list_btn.Clicked += Start_Pages;
 
             StackLayout st = new StackLayout
             {
-                Children = { editor_btn, timer_btn, box_btn, cliker_btn, datepiker_btn, ss_btn, rgb_btn, frame_btn, image_btn, svet_btn, picker_btn, table_btn }
+                Children = { editor_btn, timer_btn, box_btn, cliker_btn, datepiker_btn, ss_btn, rgb_btn, frame_btn, image_btn, svet_btn, picker_btn, table_btn, list_btn }
             };
             st.BackgroundColor = Color.FromRgb(50, 50, 50);
             Content = st;
@@ -160,6 +167,10 @@ namespace Elemendid_app
             else if (sender == table_btn)
             {
                 await Navigation.PushAsync(new Table_Page());
+            }
+            else if (sender == list_btn)
+            {
+                await Navigation.PushAsync(new List_Page());
             }
         }
     }
