@@ -53,7 +53,7 @@ namespace Elemendid_app
 
         private async void List_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            Telefon selectedPhone =e.Item as Telefon;
+            Telefon selectedPhone = e.Item as Telefon;
             if (selectedPhone != null)
                 await DisplayAlert("Выбранная модель", $"{selectedPhone.Tootja} - {selectedPhone.Nimetus}", "OK");
         }
