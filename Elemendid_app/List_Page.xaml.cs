@@ -100,7 +100,7 @@ namespace Elemendid_app
 
         private void Lisa_Clicked(object sender, EventArgs e)
         {
-            telefonideruhmandes.Add(new Ruhm { Nimetus = "Telefon", Tootja = "Tootja", Hind = 1 });
+            telefonideruhmandes.Add(new Ruhm<string, Telefon> { Nimetus = "Telefon", Tootja = "Tootja", Hind = 1 });
         }
 
         private async void List_ItemTapped(object sender, ItemTappedEventArgs e)
