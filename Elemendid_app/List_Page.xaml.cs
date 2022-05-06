@@ -15,7 +15,8 @@ namespace Elemendid_app
     public partial class List_Page : ContentPage
     {
 
-        public ObservableCollection<Telefon> telefons { get; set; }
+        //public ObservableCollection<Telefon> telefons { get; set; }
+        public ObservableCollection<Ruhm<string, Telefon>> telefonideruhmandes { get; set; }
         Label lbl_list;
         ListView list;
         Button lisa, kustuta;
@@ -27,31 +28,57 @@ namespace Elemendid_app
                 HorizontalOptions = LayoutOptions.Center,
                 FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label))
             };
-            telefons = new ObservableCollection<Telefon>
+            //telefons = new ObservableCollection<Telefon>
+            var telefonid = new List<Telefon>
             {
                 new Telefon{Nimetus="Samsung Galaxy S22 Ultra",Tootja="Samsung",Hind=1349},
                 new Telefon{Nimetus="Xiaomi Mi 11 Lite 5G NE",Tootja="Xiaomi",Hind=399},
                 new Telefon{Nimetus="Xiaomi Mi 11 Lite 5G",Tootja="Xiaomi",Hind=339},
-                new Telefon{Nimetus="iPhone 13",Tootja="Apple",Hind=1179},
+                new Telefon{Nimetus="iPhone 13 mini",Tootja="Apple",Hind=1179},
+                new Telefon{Nimetus="iPhone 12",Tootja="Apple",Hind=1179},
             };
+            var ruhmad = telefonid.GroupBy(p => p.Tootja).Select(g => new Ruhm<string, Telefon>(g.Key, g));
+            telefonideruhmandes = new ObservableCollection<Ruhm<string, Telefon>>(ruhmad);
+
             list = new ListView
             {
                 SeparatorColor = Color.Orange,
-                Header = "Minu oma kolektion:",
+                Header = "Telefonid ruhmades:",
                 Footer = DateTime.Now.ToString("T"),
 
-                HasUnevenRows=true,
-                ItemsSource=telefons,
-                ItemTemplate=new DataTemplate(() =>
-                {
-
-                    ImageCell imageCell = new ImageCell { TextColor = Color.Red, DetailColor = Color.Green };
-                    imageCell.SetBinding(ImageCell.TextProperty, "Nimetus");
-                    Binding companyBinding = new Binding { Path = "Tootja", StringFormat = "Tore telefon firmalt {0}" };
-                    imageCell.SetBinding(ImageCell.DetailProperty, companyBinding);
-                    imageCell.SetBinding(ImageCell.ImageSourceProperty, "Pilt");
-                    return imageCell;
-                })
+                HasUnevenRows = true,
+                ItemsSource = telefonideruhmandes,
+                IsGroupingEnabled = true,
+                GroupHeaderTemplate = new DataTemplate(() =>
+                  {
+                      Label tootja = new Label();
+                      tootja.SetBinding(Label.TextProperty, "Nimetus");
+                      return new ViewCell
+                      {
+                          View = new StackLayout
+                          {
+                              Padding = new Thickness(0, 5),
+                              Orientation = StackOrientation.Vertical,
+                              Children = { tootja }
+                          }
+                      };
+                  }),
+                ItemTemplate = new DataTemplate(() =>
+                  {
+                      Label nimetus = new Label { FontSize = 20 };
+                      nimetus.SetBinding(Label.TextProperty, "Nimetus");
+                      Label hind = new Label();
+                      hind.SetBinding(Label.TextProperty, "Hind");
+                      return new ViewCell
+                      {
+                          View = new StackLayout
+                          {
+                              Padding = new Thickness(0, 5),
+                              Orientation = StackOrientation.Vertical,
+                              Children = { nimetus, hind }
+                          }
+                      };
+                  })
             };
             list.ItemTapped += List_ItemTapped;
             lisa = new Button { Text = "Lisa felefon" };
@@ -63,17 +90,17 @@ namespace Elemendid_app
 
         private void Kustuta_Clicked(object sender, EventArgs e)
         {
-            Telefon phone = list.SelectedItem as Telefon;
+            Ruhm<string, Telefon> phone = list.SelectedItem as Ruhm<string, Telefon>;
             if (phone != null)
             {
-                telefons.Remove(phone);
+                telefonideruhmandes.Remove(phone);
                 list.SelectedItem = null;
             }
         }
 
         private void Lisa_Clicked(object sender, EventArgs e)
         {
-            telefons.Add(new Telefon { Nimetus = "Telefon", Tootja = "Tootja", Hind = 1 });
+            telefonideruhmandes.Add(new Ruhm { Nimetus = "Telefon", Tootja = "Tootja", Hind = 1 });
         }
 
         private async void List_ItemTapped(object sender, ItemTappedEventArgs e)
